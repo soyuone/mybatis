@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.song.mybatis.mapper.WifeMapper">
+
+	<!-- <insert id="insertWife" useGeneratedKeys="true" keyProperty="id"> INSERT 
+		INTO tb_wife (wife_name,fk_husband_id) VALUES (#{name},#{}) </insert> -->
+
 	<select id="getWifeByHusbandId" resultMap="WifeBean">
 		SELECT * FROM tb_wife
 		WHERE fk_husband_id = #{id}

@@ -31,6 +31,10 @@ public class HusbandBean implements Serializable {
 	public HusbandBean() {
 	}
 
+	public HusbandBean(String name) {
+		this.name = name;
+	}
+
 	public HusbandBean(Integer id, String name, WifeBean wife) {
 		this.id = id;
 		this.name = name;
