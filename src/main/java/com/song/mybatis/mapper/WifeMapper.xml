@@ -2,13 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.song.mybatis.mapper.WifeMapper">
 
+	<!-- 自定义返回的结果集 -->
+	<!-- 使用resultType时，一定要保证属性名与字段名相同；如果不相同就使用resultMap -->
+	<resultMap type="WifeBean" id="getWife">
+		<id property="id" column="id" javaType="java.lang.Integer" />
+		<result property="name" column="wife_name" javaType="java.lang.String" />
+	</resultMap>
+
 	<insert id="insertWife" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO tb_wife (wife_name,fk_husband_id) VALUES
 		(#{name},#{fk_husband_id})
 	</insert>
 
-	<select id="getWifeByHusbandId" resultType="WifeBean">
+	<select id="getWifeByHusbandId" resultMap="getWife">
 		SELECT * FROM tb_wife
 		WHERE fk_husband_id = #{id}
 	</select>

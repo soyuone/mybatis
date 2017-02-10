@@ -13,7 +13,8 @@ public class OneToOneService {
 	public static void main(String[] args) {
 		// insertHusband("赵三");
 		// insertWife("孙三", 1);
-		getHusbandById(2);
+		// getHusbandById(2);
+		getHusbandAndWife(1);
 	}
 
 	/**
@@ -87,7 +88,26 @@ public class OneToOneService {
 		}
 	}
 
-	private static void getHusbandAndWife() {
-
+	/**
+	 * <p>
+	 * Description:[查询Husband和Wife]
+	 * </p>
+	 * Created by [songyushi] [2017年2月10日] Midified by [修改人] [修改时间]
+	 *
+	 * @param id
+	 */
+	private static void getHusbandAndWife(int id) {
+		SqlSession sqlSession = SessionFactory.getSqlSession();
+		HusbandMapper mapper = sqlSession.getMapper(HusbandMapper.class);
+		try {
+			HusbandBean husband = mapper.getHusbandAndWife(id);
+			System.out.println("GET SUCCESS: ");
+			System.out.println(husband.toString());
+			sqlSession.commit();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+		}
 	}
 }
