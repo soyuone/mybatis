@@ -99,8 +99,8 @@ public class AccountService {
 		AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
 		try {
 			AccountBean accountBean = mapper.getAccountById(id);
-			System.out.println(accountBean.toString());
 			System.out.println("GET SUCCESS: ");
+			System.out.println(accountBean.toString());
 			sqlSession.commit();
 		}
 		catch (Exception e) {
@@ -120,8 +120,8 @@ public class AccountService {
 		AccountMapper mapper = sqlSession.getMapper(AccountMapper.class);
 		try {
 			List<AccountBean> listBean = mapper.getAllAccount();
-			System.out.println(listBean.toString());
 			System.out.println("GET SUCCESS: ");
+			System.out.println(listBean.toString());
 			sqlSession.commit();
 		}
 		catch (Exception e) {

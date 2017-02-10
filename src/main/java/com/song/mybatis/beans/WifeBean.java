@@ -26,14 +26,22 @@ public class WifeBean implements Serializable {
 
 	private String name;
 
+	private Integer fk_husband_id;
+
 	private HusbandBean husband;
 
 	public WifeBean() {
 	}
 
-	public WifeBean(Integer id, String name, HusbandBean husband) {
+	public WifeBean(String name, Integer fk_husband_id) {
+		this.name = name;
+		this.fk_husband_id = fk_husband_id;
+	}
+
+	public WifeBean(Integer id, String name, Integer fk_husband_id, HusbandBean husband) {
 		this.id = id;
 		this.name = name;
+		this.fk_husband_id = fk_husband_id;
 		this.husband = husband;
 	}
 
@@ -53,6 +61,14 @@ public class WifeBean implements Serializable {
 		this.name = name;
 	}
 
+	public Integer getFk_husband_id() {
+		return fk_husband_id;
+	}
+
+	public void setFk_husband_id(Integer fk_husband_id) {
+		this.fk_husband_id = fk_husband_id;
+	}
+
 	public HusbandBean getHusband() {
 		return husband;
 	}
@@ -63,7 +79,8 @@ public class WifeBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "WifeBean [id=" + id + ", name=" + name + ", husband=" + husband + "]";
+		return "WifeBean [id=" + id + ", name=" + name + ", fk_husband_id=" + fk_husband_id + ", husband=" + husband
+				+ "]";
 	}
 
 }

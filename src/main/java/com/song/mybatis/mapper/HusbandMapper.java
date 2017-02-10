@@ -2,6 +2,8 @@ package com.song.mybatis.mapper;
 
 import com.song.mybatis.beans.HusbandBean;
 
+//MyBatis实际是对xml进行操作，我们所有的方法都直接定义在xml中，添加此接口只是为了更好的符合三层的思想
+//若不写接口，直接通过session也可以直接操作xml中的方法；xml中只要有方法就可以使用，调用方式：namespace+方法名。
 public interface HusbandMapper {
 
 	/**
@@ -13,7 +15,7 @@ public interface HusbandMapper {
 	 * @param husband
 	 * @return
 	 */
-	public int insertHusband(String name);
+	public int insertHusband(HusbandBean husband);
 
 	/**
 	 * <p>
