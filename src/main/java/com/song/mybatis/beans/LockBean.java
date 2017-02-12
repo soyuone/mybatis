@@ -26,6 +26,10 @@ public class LockBean {
 	public LockBean() {
 	}
 
+	public LockBean(String lock_name) {
+		this.lock_name = lock_name;
+	}
+
 	public LockBean(Integer id, String lock_name, List<KeyBean> keys) {
 		this.id = id;
 		this.lock_name = lock_name;

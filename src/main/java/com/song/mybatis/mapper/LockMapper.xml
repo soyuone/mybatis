@@ -8,5 +8,25 @@
 	</resultMap>
 
 	<!--自定义返回类型 -->
-	<resultMap type="LockBean" id="lockAndKeysMap"></resultMap>
+	<resultMap type="LockBean" id="lockAndKeysMap">
+		<id property="id" column="id" javaType="java.lang.Integer" />
+		<result property="lock" column="lock_name" javaType="java.lang.String" />
+		<collection property="keys" column="id"
+			select="com.song.mybatis.mapper.KeyMapper.findKeysByLockId"></collection>
+	</resultMap>
+
+	<insert id="saveLock">
+		INSERT INTO tb_lock VALUES (null,#{lock.lock_name})
+	</insert>
+
+	<select id="findLockById" resultMap="lockMap">
+		SELECT * FROM tb_lock WHERE
+		id =#{id}
+	</select>
+
+	<select id="findLockAndKeys" resultMap="lockAndKeysMap">
+		SELECT * FROM tb_lock
+		WHERE
+		id =#{id}
+	</select>
 </mapper>
