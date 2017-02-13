@@ -4,7 +4,7 @@
 	<!--自定义返回类型 -->
 	<resultMap type="KeyBean" id="keyMap">
 		<id property="id" column="id" javaType="java.lang.Integer" />
-		<result property="key" column="key_name" javaType="java.lang.String" />
+		<result property="key_name" column="key_name" javaType="java.lang.String" />
 	</resultMap>
 
 	<!-- collection为用于遍历的元素（必选），支持数组、List、Set -->
@@ -13,7 +13,7 @@
 	<insert id="batchSaveKeys">
 		INSERT INTO tb_key VALUES
 		<foreach collection="keys" item="key" separator=",">
-			(null,#{key.key},#{key.lock.id})
+			(null,#{key.key_name},#{key.lock.id})
 		</foreach>
 	</insert>
 

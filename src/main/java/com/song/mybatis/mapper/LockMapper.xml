@@ -4,13 +4,13 @@
 	<!--自定义返回类型 -->
 	<resultMap type="LockBean" id="lockMap">
 		<id property="id" column="id" javaType="java.lang.Integer" />
-		<result property="lock" column="lock_name" javaType="java.lang.String" />
+		<result property="lock_name" column="lock_name" javaType="java.lang.String" />
 	</resultMap>
 
 	<!--自定义返回类型 -->
 	<resultMap type="LockBean" id="lockAndKeysMap">
 		<id property="id" column="id" javaType="java.lang.Integer" />
-		<result property="lock" column="lock_name" javaType="java.lang.String" />
+		<result property="lock_name" column="lock_name" javaType="java.lang.String" />
 		<collection property="keys" column="id"
 			select="com.song.mybatis.mapper.KeyMapper.findKeysByLockId"></collection>
 	</resultMap>
