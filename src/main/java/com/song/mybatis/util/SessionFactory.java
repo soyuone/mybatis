@@ -8,6 +8,19 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+/**
+ * <p>
+ * Title: mybatis_[SqlSessionFactory工具类]_[模块名]
+ * </p>
+ * <p>
+ * Description: [SqlSessionFactory工具类]
+ * </p>
+ * 
+ * @author songyushi
+ * @version $Revision$ 2017年2月13日
+ * @author (lastest modification by $Author$)
+ * @since 20100901
+ */
 public class SessionFactory {
 
 	public static SqlSessionFactory sqlSessionFactory;

@@ -10,16 +10,21 @@
 	</resultMap>
 
 	<!-- 在各种标签中的id属性必须和接口中的方法名相同 ， id属性值必须是唯一的，不能够重复使用。parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型 -->
-	<!-- useGeneratedKeys：（仅对insert有用）这会告诉 MyBatis使用JDBC的getGeneratedKeys方法来取出由数据（比如：像MySQL和SQLServer这样的数据库管理系统的自动递增字段）内部生成的主键。默认值： false。 -->
-	<!-- keyProperty： （仅对 insert有用）标记一个属性， MyBatis 会通过 getGeneratedKeys或者通过insert语句的 selectKey子元素设置它的值。默认：不设置。 -->
+	<!-- useGeneratedKeys：（仅对insert有用）这会告诉 MyBatis使用JDBC的getGeneratedKeys方法来取出由数据（比如：像MySQL和SQLServer这样的数据库管理系统的自动递增字段）内部生成的主键。默认值： 
+		false。 -->
+	<!-- keyProperty： （仅对 insert有用）标记一个属性， MyBatis 会通过 getGeneratedKeys或者通过insert语句的 
+		selectKey子元素设置它的值。默认：不设置。 -->
 	<!-- #{}中的内容为占位符，当参数为某个JavaBean时，表示放置该Bean对象的属性值 -->
 
-	<insert id="insertAccount" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO tb_account (username,password,account) VALUES (#{username},#{password},#{account})
+	<insert id="insertAccount" useGeneratedKeys="true" keyProperty="a.id">
+		INSERT INTO tb_account (username,password,account) VALUES
+		(#{a.username},#{a.password},#{a.account})
 	</insert>
 
 	<update id="updateAccount">
-		UPDATE tb_account SET username=#{username},password=#{password},account=#{account} WHERE
+		UPDATE tb_account SET
+		username=#{a.username},password=#{a.password},account=#{a.account}
+		WHERE
 		id=#{id}
 	</update>
 
@@ -34,6 +39,46 @@
 
 	<select id="getAllAccount" resultMap="accountMap">
 		SELECT * FROM tb_account
+	</select>
+
+
+	<!-- 批量操作和foreach标签 -->
+
+	<!-- collection为用于遍历的元素（必选），支持数组、List、Set -->
+	<!-- item表示集合中每一个元素进行迭代时的别名 -->
+	<!-- separator表示在每次进行迭代之间以什么符号作为分隔符 -->
+	<insert id="batchInsertAccount" parameterType="java.util.List">
+		INSERT INTO tb_account VALUES
+		<foreach collection="accounts" item="account" separator=",">
+			(null,#{account.username},#{account.password},#{account.account})
+		</foreach>
+	</insert>
+
+	<delete id="batchDeleteAccount">
+		DELETE FROM tb_account WHERE id IN (
+		<foreach collection="ids" item="id" separator=",">
+			#{id}
+		</foreach>
+		)
+	</delete>
+
+	<!-- #在生成SQL时，对于字符类型参数，会拼装引号 -->
+	<!-- $在生成SQL时，不会拼装引号，可用于order by之类的参数拼装 -->
+	<select id="getAccountByPage" parameterType="java.util.Map"
+		resultMap="accountMap">
+		SELECT * FROM tb_account WHERE 1=1
+		<if test="username != null">
+			AND username LIKE '%${username}%'
+		</if>
+		LIMIT ${index},${pageSize}
+	</select>
+
+	<select id="countAccount" parameterType="java.util.Map"
+		resultType="int">
+		SELECT COUNT(*) FROM tb_account WHERE 1=1
+		<if test="username != null">
+			AND username LIKE '%${username}%'
+		</if>
 	</select>
 
 </mapper>
