@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.song.mybatis.mapper.CourseMapper">
+
+	<!-- 自定义返回类型 -->
+	<!-- MyBatis实际是对xml进行操作，所有的方法都直接定义在xml中，写接口只是为了更好的符合分层的思想 -->
+	<!-- xml中只要有方法就可以使用，调用方式：namespace+方法名 -->
+	<resultMap type="CourseBean" id="courseMap">
+		<!-- 默认情况下MyBatis会自动在TypeAliasRegistry初始化的时候挂载很多常用类，所以javaType中可以简写 -->
+		<id property="id" column="id" javaType="Integer" />
+		<result property="name" column="course_name" javaType="String" />
+	</resultMap>
+
+	<resultMap type="CourseBean" id="couAndStu">
+		<id property="id" column="id" javaType="Integer" />
+		<result property="name" column="course_name" javaType="String" />
+		<!-- 如果属性的类型是一个集合，就使用collection；对于属性的类型是一个类，就使用association -->
+		<collection property="studentList" column="id" select="getStuByCou"></collection>
+	</resultMap>
+
+	<select id="getCourseById" resultMap="courseMap">
+		SELECT * FROM tb_course
+		WHERE id=#{id}
+	</select>
+
+	<select id="getCouAndStu" resultMap="couAndStu">
+		SELECT * FROM tb_course
+		WHERE id=#{id}
+	</select>
+
+	<select id="getStuByCou" resultMap="com.song.mybatis.mapper.StudentMapper.studentMap">
+		SELECT * FROM tb_course WHERE
+		id IN( SELECT fk_stu_id FROM tb_stu_cou WHERE fk_cou_id = #{id} )
+	</select>
+</mapper>
