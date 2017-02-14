@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.song.mybatis.beans.CourseBean;
 
-public interface CourceMapper {
+public interface CourseMapper {
 
 	/**
 	 * <p>
@@ -14,7 +14,7 @@ public interface CourceMapper {
 	 *
 	 * @return
 	 */
-	public CourseBean getCourseById(@Param("id") int id);
+	public CourseBean getCourseById(@Param("id") int id) throws Exception;
 
 	/**
 	 * <p>
@@ -25,6 +25,6 @@ public interface CourceMapper {
 	 * @param id
 	 * @return
 	 */
-	public CourseBean getCouAndStu(@Param("id") int id);
+	public CourseBean getCouAndStu(@Param("id") int id) throws Exception;
 
 }

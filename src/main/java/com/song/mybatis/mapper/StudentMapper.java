@@ -15,7 +15,7 @@ public interface StudentMapper {
 	 * @param id
 	 * @return
 	 */
-	public StudentBean getStudentById(@Param("id") int id);
+	public StudentBean getStudentById(@Param("id") int id) throws Exception;
 
 	/**
 	 * <p>
@@ -26,5 +26,5 @@ public interface StudentMapper {
 	 * @param id
 	 * @return
 	 */
-	public StudentBean getStuAndCou(@Param("id") int id);
+	public StudentBean getStuAndCou(@Param("id") int id) throws Exception;
 }

@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="getCouByStu" resultMap="com.song.mybatis.mapper.CourseMapper.courseMap">
-		SELECT * FORM tb_course WHERE
+		SELECT * FROM tb_course WHERE
 		id IN( SELECT fk_cou_id FROM tb_stu_cou WHERE fk_stu_id = #{id} )
 	</select>
 </mapper>
