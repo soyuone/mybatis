@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.song.mybatis.mapper.PetMapper">
+	<resultMap type="PetBean" id="petMap">
+		<id property="id" column="id" javaType="Integer" />
+		<result property="name" column="name" javaType="String" />
+
+		<!-- discriminator：根据结果值决定使用哪个resultMap. case：判断条件,鉴别器指定了column和javaType属性 -->
+		<discriminator javaType="String" column="type">
+			<case value="cat" resultType="CatBean">
+				<result property="fish" column="fish" javaType="Integer" />
+			</case>
+			<case value="dog" resultType="DogBean">
+				<result property="bone" column="bone" javaType="Integer" />
+			</case>
+		</discriminator>
+	</resultMap>
+
+	<insert id="saveCat">
+		INSERT INTO tb_pet(name,type,fish)
+		VALUES(#{cat.name},'cat',#{cat.fish} )
+	</insert>
+
+	<insert id="saveDog">
+		INSERT INTO tb_pet(name,type,bone)
+		VALUES(#{dog.name},'dog',#{dog.bone} )
+	</insert>
+
+	<select id="findAllPet" resultMap="petMap">
+		SELECT * FROM tb_pet
+	</select>
+
+	<select id="findAllCat" resultMap="petMap">
+		SELECT * FROM tb_pet WHERE
+		type= 'cat'
+	</select>
+</mapper>
