@@ -13,7 +13,7 @@
 		<result property="name" column="husband_name" javaType="java.lang.String" />
 
 		<!-- association – 一个复杂的类型关联；许多结果将包装成这种类型嵌入结果映射 – 结果映射自身的关联，或者参考一个 column="id" 
-			这里的id指的是在tb_wife表的主键id，所以在妻子mapper里有个方法getWifeByHusbandId -->
+			这里的id指的是在tb_husband表的主键id，所以在妻子mapper里有个方法getWifeByHusbandId -->
 		<association property="wife" column="id" javaType="WifeBean"
 			select="com.song.mybatis.mapper.WifeMapper.getWifeByHusbandId"></association>
 	</resultMap>
