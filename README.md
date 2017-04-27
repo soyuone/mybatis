@@ -1,2 +1,2 @@
-# mybatis
-a mybatis project for learning.
+# mybatis - a learning project
+MyBatis.
